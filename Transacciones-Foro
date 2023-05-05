@@ -1,0 +1,23 @@
+DELIMITER $$
+CREATE PROCEDURE insertar_datos()
+BEGIN
+  DECLARE EXIT HANDLER FOR 1062 SELECT'Acción no válida';
+    BEGIN
+      ROLLBACK;
+  END;
+  
+  START TRANSACTION;
+	INSERT INTO clientes (ID_Cliente,NombreCompleto,Celular,Tipo_doc_codigo)
+	VALUES (90001,'AAAAA',3116752189,1);
+    SELECT 'Primer cliente';
+	INSERT INTO clientes (ID_Cliente,NombreCompleto,Celular,Tipo_doc_codigo)
+	VALUES (90002,'BBBBB',3127439181,1);
+    SELECT 'Segundo cliente';
+    INSERT INTO clientes (ID_Cliente,NombreCompleto,Celular,Tipo_doc_codigo)
+	VALUES (90002,'BBBBB',3127439181,1);
+    SELECT 'Segundo cliente';
+      commit;
+END $$
+DELIMITER ;
+
+call insertar_datos
